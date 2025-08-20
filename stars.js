@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (document.body.contains(text)) {
                 document.body.removeChild(text);
             }
-        }, 6000);
+        }, 8000);
     }
 
     // Xử lý sự kiện click
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Tạo text tự động mỗi 3 giây
-    setInterval(createAutoText, 1000);
+    setInterval(createAutoText, 3000);
 
     // Mảng các link ảnh
     let currentImageIndex = 0;
