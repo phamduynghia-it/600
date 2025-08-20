@@ -839,7 +839,7 @@ body {
     z-index: 1000;
     text-shadow: 0 0 6px #ffb6c1;
     pointer-events: none;
-    animation: fadeInOut 2s ease-out forwards;
+    animation: fadeInOut 6s ease-out forwards;
     text-align: center;
     font-weight: bold;
     padding: 4px 10px;
