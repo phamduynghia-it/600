@@ -16,6 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
         " Chúc e có 1 ngày sinh nhật thật vui vẻ",
     ];
 
+    // Biến đếm để lấy text theo thứ tự
+    let currentMessageIndex = 0;
+    function getNextMessage() {
+        const msg = messages[currentMessageIndex];
+        currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+        return msg;
+    }
+
     // Tạo gradient màu ngẫu nhiên
     function getRandomGradient() {
         const pinkShades = [
@@ -24,21 +32,17 @@ document.addEventListener("DOMContentLoaded", () => {
             "#ffb6c1", // Light Pink
             "#ffc0cb", // Pink
             "#db7093", // Pale Violet Red
-            "#ff69b4", // Hot Pink
-            "#ff1493", // Deep Pink
+            "#ff69b4",
+            "#ff1493",
         ];
 
         const whiteShades = [
-            "#ffffff", // White
-            "#f8f8f8", // Off White
-            "#f0f0f0", // Light Gray
-            "#e8e8e8", // Light Gray
-            "#f5f5f5", // White Smoke
+            "#ffffff", "#f8f8f8", "#f0f0f0",
+            "#e8e8e8", "#f5f5f5",
         ];
 
         const pink = pinkShades[Math.floor(Math.random() * pinkShades.length)];
-        const white =
-            whiteShades[Math.floor(Math.random() * whiteShades.length)];
+        const white = whiteShades[Math.floor(Math.random() * whiteShades.length)];
         const angle = Math.floor(Math.random() * 360);
 
         return `linear-gradient(${angle}deg, ${pink}, ${white})`;
@@ -51,15 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
         petal.style.left = `${x}px`;
         petal.style.top = `${y}px`;
 
-        // Tạo hướng rơi ngẫu nhiên
-        const fallX = (Math.random() - 0.5) * 200; // -100px đến 100px
-        const fallY = Math.random() * 200 + 100; // 100px đến 300px
+        const fallX = (Math.random() - 0.5) * 200;
+        const fallY = Math.random() * 200 + 100;
         petal.style.setProperty("--fall-x", `${fallX}px`);
         petal.style.setProperty("--fall-y", `${fallY}px`);
 
         document.body.appendChild(petal);
 
-        // Xóa cánh hoa sau khi animation kết thúc
         setTimeout(() => {
             if (document.body.contains(petal)) {
                 document.body.removeChild(petal);
@@ -69,39 +71,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Hàm tạo text và cánh hoa
     function createTextAndPetals(x, y) {
-
-        const randomMessage =
-            messages[Math.floor(Math.random() * messages.length)];
+        const nextMessage = getNextMessage();
         const text = document.createElement("div");
         text.classList.add("click-text");
-        text.textContent = randomMessage;
+        text.textContent = nextMessage;
         text.style.setProperty("--gradient-color", getRandomGradient());
 
-        // Đặt vị trí text
         text.style.left = `${x}px`;
         text.style.top = `${y}px`;
 
         document.body.appendChild(text);
 
-        // Tạo nhiều cánh hoa xung quanh vị trí
         for (let i = 0; i < 8; i++) {
             const offsetX = (Math.random() - 0.5) * 50;
             const offsetY = (Math.random() - 0.5) * 50;
             createPetal(x + offsetX, y + offsetY);
         }
 
-        // Xóa text sau khi animation kết thúc
         setTimeout(() => {
             if (document.body.contains(text)) {
                 document.body.removeChild(text);
             }
         }, 8000);
     }
-
-    // Xử lý sự kiện click
-    document.addEventListener("click", (event) => {
-        createTextAndPetals(event.clientX, event.clientY);
-    });
 
     // Tự động tạo text sau mỗi khoảng thời gian
     function createAutoText() {
@@ -110,8 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
         createTextAndPetals(x, y);
     }
 
-    // Tạo text tự động mỗi 3 giây
-    setInterval(createAutoText, 3000);
+    // Tạo text tự động mỗi 4 giây
+    setInterval(createAutoText, 5000);
 
     // Mảng các link ảnh
     let currentImageIndex = 0;
@@ -154,14 +146,12 @@ document.addEventListener("DOMContentLoaded", () => {
         heart.classList.add("falling-heart");
         heart.textContent = "❤";
 
-        // Tạo vị trí ngẫu nhiên trên toàn bộ chiều rộng màn hình
-        const maxLeft = window.innerWidth - 50; // Trừ đi chiều rộng của trái tim
+        const maxLeft = window.innerWidth - 50;
         const randomLeft = Math.random() * maxLeft;
         heart.style.left = `${randomLeft}px`;
         heart.style.top = "-50px";
 
-        // Tạo animation rơi
-        const duration = Math.random() * 2 + 3; // 1-3 giây
+        const duration = Math.random() * 2 + 3;
         const distance = window.innerHeight + 50;
 
         heart.style.animation = `fall ${duration}s linear forwards`;
@@ -169,7 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         container.appendChild(heart);
 
-        // Xóa trái tim sau khi animation kết thúc
         setTimeout(() => {
             if (container.contains(heart)) {
                 container.removeChild(heart);
