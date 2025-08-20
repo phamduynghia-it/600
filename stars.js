@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Mảng các link ảnh
     let currentImageIndex = 0;
-    const imageUrls = Array.from({ length: 15 }, (_, i) => `a${i + 1}.jpg`);
+    const imageUrls = Array.from({ length: 16 }, (_, i) => `a${i + 1}.jpg`);
 
     function getNextImageUrl() {
         const url = imageUrls[currentImageIndex];
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         image.style.left = `${randomLeft}px`;
         image.style.top = "-260px";
 
-        const duration = Math.random() * 3 + 4;
+        const duration = Math.random() * 3 + 8;
         const distance = window.innerHeight + 260;
 
         image.style.animation = `fall ${duration}s linear forwards`;
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Tạo ảnh rơi mỗi 2-3 giây
-    setInterval(createFallingImage, Math.random() * 1000 + 2000);
+    setInterval(createFallingImage, Math.random() * 1000 + 3000);
 
     // Tạo trái tim rơi mỗi 0.5-1 giây
     setInterval(createFallingHeart, Math.random() * 500 + 500);
